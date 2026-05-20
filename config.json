@@ -3,7 +3,7 @@
     "dataCollectionOptions": {
         "decisionModels": [["none"]],
         "numParallelSimJobs": 1,
-        "numSeeds": 100,
+        "numSeeds": 30,
         "plots": ["deaths", "giniCoefficient", "happiness", "lifeExpectancy", "population", "sickness", "tradeVolume", "ttl", "wealth"],
         "plotStatistic": "mean",
         "plotTimesteps": 1000,
@@ -121,6 +121,6 @@
         "startingAgents": 250,
         "startingDiseases": 50,
         "startingDiseasesPerAgent": [0, 0],
-        "timesteps": 1000
+        "timesteps": 5000
     }
 }
