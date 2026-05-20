@@ -119,7 +119,32 @@ This study addresses that gap by examining the societal outcomes of ethical deci
 				
 		
 		\section{METHODOLOGY}
-			\lipsum[1]
+			\subsection{Research Design}
+				This study used a computational experimental research design using agent-based simulation. The study examined how resource concentration affects the societal outcomes of ethical decision models in the Sugarscape Digital Terrarium. The research design was experimental because the study compared different decision-making conditions and resource configurations within the same simulation environment.
+
+				The study manipulated two independent variables: resource configuration and ethical decision model. Resource configuration had two levels: the original four-peak layout, consisting of two sugar peaks and two spice peaks distributed across opposing quadrants, which served as the control condition; and a single-peak layout, in which all resources were concentrated at one location, which served as the treatment condition. The ethical decision model had three levels: utilitarian, altruistic, and egoistic, corresponding to the decision models implemented in the Digital Terrarium by Kremer-Herman et al. (2024). These two variables produced a 2x3 experimental design with six conditions in total.
+
+				\begin{table}[ht]
+				\vspace{4ex}
+				\centering
+					\caption{Experimental Conditions}
+					\label{table:experimental-conditions}
+					\begin{tabular}{llll}
+					\hline\hline
+					\textbf{Condition} & \textbf{Resource Configuration} & \textbf{Decision Model} \\ \hline
+					1 & Four-peak (control) & Utilitarian \\
+					2 & Four-peak (control) & Altruistic \\
+					3 & Four-peak (control) & Egoistic \\
+					4 & Single-peak (treatment) & Utilitarian \\
+					5 & Single-peak (treatment) & Altruistic \\
+					6 & Single-peak (treatment) & Egoistic \\ \hline\hline
+					\end{tabular}
+				\vspace{4ex}
+				\end{table}
+
+				Conditions 1 through 3 replicated the original Digital Terrarium experiments of Kremer-Herman et al. (2024) and served as the experimental baseline. Conditions 4 through 6 introduced the single-peak resource configuration and constituted the novel experimental contribution of this study.
+
+				The dependent variables measured were population size over time, population end state, mean agent wealth, total societal wealth, Gini coefficient of wealth distribution, and mean life expectancy. All other simulation parameters were held constant across conditions, including grid size at 50 by 50 cells, starting agent population at 250, and all remaining Digital Terrarium default settings. Each condition was run across 100 independent random seeds to account for stochastic variation, producing a total of 600 simulation runs. Results across seeds were averaged to obtain stable estimates for each condition.
 			
 			%FIGURE INSERTION SAMPLE
 			\begin{figure}[ht]
