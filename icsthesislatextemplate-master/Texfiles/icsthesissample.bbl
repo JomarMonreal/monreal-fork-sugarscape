@@ -1,0 +1,28 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+Crescenzi%
+\ \BBA {} Kann%
+}{%
+Crescenzi%
+\ \BBA {} Kann%
+}{%
+{\protect \APACyear {1997}}%
+}]{%
+CrescenziKann1997}
+\APACinsertmetastar {%
+CrescenziKann1997}%
+\begin{APACrefauthors}%
+Crescenzi, P.%
+\BCBT {}\ \BBA {} Kann, V.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{1997}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Approximation on the Web: A Compendium of NP Optimization Problems.} {Approximation on the web: A compendium of np optimization problems.}{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {RANDOM'97} {Random'97}\ (\BPG~111-118).
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}

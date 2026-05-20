@@ -1,0 +1,168 @@
+%Sample for icsthesis.cls
+%Author: JCEPlaras
+%Reminders: Omit \lipsum commands
+
+\documentclass{icsthesis}
+\usepackage{lipsum} %for generating dummy text
+
+%\usepackage{showframe} %for debugging the margins
+                              
+                              
+%Replace the values here, various commands depend on this variables                                                                                                                                                            
+\renewcommand{\TITLE}{EFFECTS OF RESOURCE CONCENTRATION ON ETHICAL AGENT SOCIETAL OUTCOMES IN THE SUGARSCAPE DIGITAL TERRARIUM}
+\renewcommand{\AUTHOR}{JOMAR MONREAL}
+\renewcommand{\DEGREE}{BACHELOR OF SCIENCE}
+\renewcommand{\MAJOR}{Computer Science}
+\renewcommand{\MONTH}{MAY}
+\renewcommand{\YEAR}{2026}
+
+% Add \sloppy to adjust spacing more flexibly
+\sloppy
+
+% Add custom hyphenation points for long words
+\hyphenation{pla-tea dic-tu-mst in-te-ger tem-pus con-val-lis au-gue fa-ci-li-sis ele-men-tum fer-men-tum so-ci-etal en-vi-ron-men-tal in-fras-truc-ture pol-icy out-comes}
+
+\begin{document}
+	
+	\begin{frontmatter}
+		%create title
+		\maketitle
+				
+		\begin{approvalpage}
+			The thesis hereto attached entitled \TITLE , prepared and submitted by \AUTHOR , in partial fulfillment of the requirements for the degree of \DEGREE\ (\MAJOR) is hereby accepted.
+			
+			\begin{multicols}{2}
+				\centering
+				\addsignature{ISAAC X. NEWTON}{Member, Guidance Committee} %custom command for adding signature field
+				\columnbreak
+				\addsignature{ISAAC X. NEWTON}{Member, Guidance Committee}
+			\end{multicols}
+			\addsignature{ALAN X. TURING}{Chair, Guidance Committee}
+			
+			Accepted in partial fulfillment of the requirements for the degree of \DEGREE\ (\MAJOR). 
+			\addsignature{EDSGER W. DIJKSTRA}{Director, Institute of Graphs}
+			\addsignature{STEPHEN W. HAWKING}{Dean, Graduate School\\University of the Mars Los Ba\~{n}os}
+		\end{approvalpage}
+		
+		\begin{biosketch}
+			\lipsum[4] %insert dummy text
+			
+			MUST NOT EXCEED ONE PAGE.		
+			
+			\addauthorsignaturefield
+		\end{biosketch}	
+		
+		%acknowledgement
+		\begin{acknowledgement}
+			\lipsum[4]
+			\lipsum[4]
+			\lipsum[4]
+			MUST NOT EXCEED ONE PAGE.
+		\end{acknowledgement}
+		
+		%TOC
+		\maketableofcontents
+		
+		%LOT
+		\makelistoftables
+
+		%LOF
+		\makelistoffigures
+	
+		%ABSTRACT
+		
+		\begin{abstractwithpageno}	
+		\\
+		\textbf{\AUTHOR}, University of the Philippines Los Ba\~{n}os, \MONTH\ \YEAR. \textbf{\TITLE}
+		\\Major Professor: PROF. EDSGER W. DIJKSTRA\\
+			
+			\lipsum[4]MUST NOT EXCEED ONE PAGE.
+		\end{abstractwithpageno}
+
+	\end{frontmatter}
+	
+	%BODY OF THESIS HERE (Use up to 3 levels only, (sec -> subsec -> subsubsec)
+	\begin{mainmatter}
+		\section{INTRODUCTION}
+			\subsection{Background of the Study}
+Ethical decision-making is a central challenge in designing modern computational systems. As artificial agents become more capable of autonomous action, researchers need ways to test how ethical decision rules shape both individual behavior and collective outcomes. Yet many ethically significant situations cannot be tested in real life, since doing so may cause harm, violate consent, or create unacceptable risks. Agent-based modeling (ABM) offers a practical alternative: it lets researchers simulate societies of interacting agents and observe how individual choices generate broader social outcomes. ABM enables virtual ethical experiments that would be impermissible in real settings and supports inquiry where direct data collection would violate ethical constraints (Lasquety-Reyes, 2018; Slater et al., 2006; Groff et al., 2018).
+
+The Digital Terrarium developed by Kremer-Herman et al. (2024) extends the standard Sugarscape agent-based simulation with a socio-ethical decision layer. This lets agents follow ethical models rather than purely greedy behavior focused on maximizing resources. The framework implements three ethical theories: Bentham's hedonic act utilitarianism, ethical altruism, and ethical egoism. It also allows researchers to compare how these ethical orientations shape survival, resource distribution, and societal stability. Kremer-Herman et al. (2024) reported that utilitarian societies consistently outperformed altruistic and egoistic ones, with larger populations, greater accumulated wealth, and longer survival (p. 195607). These findings mark a key step in computational ethical modeling and show that the chosen ethical decision model has measurable societal effects.
+
+The way resources are distributed in the simulation environment also affects how agents behave and what outcomes emerge at the societal level. In agent-based simulation, the environment provides the infrastructure and social drivers that shape agent behaviors and policy outcomes (Tolk et al., 2022, pp. 90, 92). Hawick (2014) demonstrated this directly in Sugarscape, finding that initial resource peak configuration dramatically affects the inequalities in agent opportunity and population survival times. Specifically, agents located near resource peaks become super-rich while those on the flat plains starve to death, and the system as a whole lasts longer under concentrated, unequal resource conditions than under evenly distributed ones (pp. 2-3, 6). Despite this, Hawick's investigation was limited to greedy agents with no ethical model. In turn, Kremer-Herman et al. (2024) tested their ethical decision models exclusively under a symmetric four-peak resource configuration: two sugar peaks and two spice peaks distributed across opposing quadrants. It creates a balanced landscape in which resources remain accessible across most of the simulation environment. No study has examined how ethical decision models perform when resource access is geographically concentrated rather than distributed. 
+
+This is a significant gap. Kremer-Herman et al. (2024) found that non-utilitarian societies frequently went extinct because they were not suited to survive in a hostile environment (p. 195600). However, the resource configuration of that environment was kept the same throughout their study. It remains unknown whether their findings hold when the environment itself is made more extreme.
+
+This study addresses that gap by examining the societal outcomes of ethical decision models in the Sugarscape Digital Terrarium under a single-peak resource configuration, in which all resources are concentrated in one location, leaving the remainder of the landscape resource-poor. By reducing the resource landscape from four peaks to one, this study creates the condition of genuine resource scarcity that Hawick (2014) identified as producing the sharpest inequalities in agent opportunity. The study compares the performance of utilitarian, altruistic, and egoistic decision models under this concentrated environment and evaluates whether the comparative advantage of utilitarianism established by Kremer-Herman et al. (2024) under a balanced resource layout is preserved, amplified, or diminished when agents must compete under extreme resource concentration. In doing so, this study contributes to the growing field of computational ethics by examining the sensitivity of ethical model outcomes to environmental conditions, and offers evidence on whether resource geography is a variable that researchers must control when drawing conclusions from ethical agent simulations.
+			\subsection{Statement of the Problem}
+				\lipsum
+			
+			\subsection{Objectives of the Study}
+				The general objective of this study is to examine the effects of resource concentration on the societal outcomes of ethical decision models in the Sugarscape Digital Terrarium simulation. Specifically, this study aims to:
+
+				\begin{enumerate}
+					\item compare the societal outcomes of utilitarian, altruistic, and egoistic decision models under the original four-peak resource configuration as an experimental baseline;
+					\item compare the societal outcomes of utilitarian, altruistic, and egoistic decision models under a single-peak resource configuration; and
+					\item determine whether the performance advantage of the utilitarian decision model observed by Kremer-Herman et al. (2024) under the four-peak configuration is preserved, amplified, or diminished when resource access is concentrated under a single-peak environment.
+				\end{enumerate}
+		
+		\section{REVIEW OF LITERATURE}
+			\subsection{Here Subsection}
+				\lipsum[4]
+				\subsubsection{Apa Subsubsection}
+					APA CITATION SAMPLE HERE USING BIBTEX \citep{CrescenziKann1997}
+				\subsubsection{Wooo subsubsection}
+					\lipsum
+			\subsection{Here Subsection}
+				\lipsum[6]
+				
+				
+		
+		\section{METHODOLOGY}
+			\lipsum[1]
+			
+			%FIGURE INSERTION SAMPLE
+			\begin{figure}[ht]
+			\begin{center}
+				\vspace{4ex}
+				\includegraphics[width=200px]{figuretest}
+				\label{fig:Test Caption Figure}	
+				\caption{Test Caption Figure}
+			\end{center}
+			\end{figure}
+			
+			\lipsum
+		
+		\section{RESULTS AND DISCUSSION}
+			\lipsum[4]
+			
+			%TABLE INSERTION SAMPLE
+			\begin{table}[ht]
+			\vspace{4ex}
+			\centering
+				\caption{Test Caption Table}
+				
+				\label{table:Test Caption Table}
+				\begin{tabular}{llllll}
+				\hline
+				\hline
+				1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+				1 & 2 & 3 & 4 & 5 & 6 \\
+				1 & 2 & 3 & 4 & 5 & 6 \\
+				1 & 2 & 3 & 4 & 5 & 6 \\ \hline\hline
+				\end{tabular} 
+			\vspace{4ex}
+			\end{table}
+			
+			\lipsum[4-10]
+			\lipsum[5]
+		
+		\section{SUMMARY AND CONCLUSION}
+			\lipsum[4]
+		
+		%References command
+		%Parameter is the references bib file without extension
+		\makereferences{references}
+			
+	\end{mainmatter}
+\end{document}
