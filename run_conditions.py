@@ -44,9 +44,11 @@ def run_condition(condition, base_config):
         json.dump(config, f, indent=4)
 
     print(f"\n--- Condition {cid}: {label} ---")
+    project_root = os.path.dirname(os.path.abspath(__file__))
+    data_dir = os.path.join(project_root, "data")
     result = subprocess.run(
-        [PYTHON, "data/run.py", "--conf", config_path, "--path", output_dir + "/", "--mode", "csv"],
-        cwd=os.path.dirname(os.path.abspath(__file__))
+        [PYTHON, "run.py", "--conf", os.path.abspath(config_path), "--path", os.path.abspath(output_dir) + "/", "--mode", "csv"],
+        cwd=data_dir
     )
 
     if result.returncode != 0:
