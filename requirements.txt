@@ -1,0 +1,7 @@
+# Core scientific stack — pinned for broad CPU compatibility (no AVX/SSE4.2 required)
+# NumPy 2.x raised its baseline to X86_V2; 1.26.x requires only SSE2
+numpy==1.26.4
+scipy==1.13.1
+matplotlib==3.9.4
+pandas==2.2.3
+scikit-posthocs==0.9.0
