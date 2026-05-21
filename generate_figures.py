@@ -8,10 +8,11 @@ figures/01_population_timeseries.png
 figures/02_societalWealth_timeseries.png
 figures/03_giniCoefficient_timeseries.png
 figures/04_meanTimeToLive_timeseries.png
-figures/05_final_values_boxplot.png
-figures/06_extinction_rate.png
-figures/07_effect_size_gradient.png
-figures/08_execution_time.png
+figures/05_meanWealth_timeseries.png
+figures/06_final_values_boxplot.png
+figures/07_extinction_rate.png
+figures/08_effect_size_gradient.png
+figures/09_execution_time.png
 data/descriptive_summary.csv
 data/hypothesis_test_results.csv   (also printed to console)
 
@@ -65,6 +66,7 @@ TS_METRICS = [
     ("societalWealth",  "Societal Wealth"),
     ("giniCoefficient", "Gini Coefficient"),
     ("meanTimeToLive",  "Mean Time to Live (timesteps)"),
+    ("meanWealth",      "Mean Agent Wealth"),
 ]
 
 FINAL_METRICS = [
@@ -72,6 +74,7 @@ FINAL_METRICS = [
     ("finalSocietalWealth", "Final Societal Wealth"),
     ("finalGini",           "Final Gini Coefficient"),
     ("finalMeanTimeToLive", "Final Mean Time to Live"),
+    ("finalMeanWealth",     "Final Mean Agent Wealth"),
 ]
 
 ALPHA = 0.05
@@ -203,7 +206,7 @@ def plot_final_boxplots(seed_df):
     width    = 0.22
     x_labels = ["d=14\n(distributed)", "d=7\n(intermediate)", "d=0\n(concentrated)"]
 
-    fig, axes = plt.subplots(2, 2, figsize=(12, 7))
+    fig, axes = plt.subplots(2, 3, figsize=(15, 7))
     axes = axes.flatten()
     fig.suptitle("Final Outcome Distributions by Condition",
                  fontsize=11, fontweight="bold")
@@ -249,7 +252,7 @@ def plot_final_boxplots(seed_df):
     ]
     axes[-1].legend(handles=legend_handles, loc="best")
     fig.tight_layout()
-    out = os.path.join(FIG_DIR, "05_final_values_boxplot.png")
+    out = os.path.join(FIG_DIR, "06_final_values_boxplot.png")
     fig.savefig(out, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {out}")
@@ -287,7 +290,7 @@ def plot_extinction_rate(seed_df):
     ax.set_title("Extinction Rate by Condition and Agent Type", fontweight="bold")
     ax.legend()
     fig.tight_layout()
-    out = os.path.join(FIG_DIR, "06_extinction_rate.png")
+    out = os.path.join(FIG_DIR, "07_extinction_rate.png")
     fig.savefig(out, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {out}")
@@ -301,8 +304,8 @@ def plot_effect_size_gradient(seed_df):
         return
 
     d_vals = [0, 7, 14]
-    fig, axes = plt.subplots(1, 4, figsize=(13, 4))
-    fig.suptitle(r"Effect Size ($\eta^2_H$) vs. Peak Distance $d$  —  Gradient Hypothesis ($H_2$)",
+    fig, axes = plt.subplots(1, 5, figsize=(16, 4))
+    fig.suptitle(r"Effect Size ($\eta^2_H$) vs. Peak Distance $d$  (RQ4)",
                  fontsize=10, fontweight="bold")
 
     threshold_lines = [
@@ -356,7 +359,7 @@ def plot_effect_size_gradient(seed_df):
             ax.legend(fontsize=6, loc="upper left")
 
     fig.tight_layout()
-    out = os.path.join(FIG_DIR, "07_effect_size_gradient.png")
+    out = os.path.join(FIG_DIR, "08_effect_size_gradient.png")
     fig.savefig(out, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {out}")
@@ -402,7 +405,7 @@ def plot_execution_time(seed_df):
     ]
     ax.legend(handles=legend_handles)
     fig.tight_layout()
-    out = os.path.join(FIG_DIR, "08_execution_time.png")
+    out = os.path.join(FIG_DIR, "09_execution_time.png")
     fig.savefig(out, bbox_inches="tight")
     plt.close(fig)
     print(f"  Saved: {out}")
@@ -601,7 +604,7 @@ def main():
     run_statistics(seed_df)
 
     print("Done.")
-    print(f"  figures/                     — 8 PNGs (300 dpi)")
+    print(f"  figures/                     — 9 PNGs (300 dpi)")
     print(f"  data/descriptive_summary.csv — mean, SD, median, IQR per condition")
     print(f"  data/hypothesis_test_results.csv — KW + Dunn + eta2_H + chi-square")
 
