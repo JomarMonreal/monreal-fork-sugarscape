@@ -9,10 +9,11 @@ def build_conditions(step=20):
     conditions = []
     for pct in range(step, 100, step):
         conditions.append({
-            "label":       f"d14_hetero_p{pct:03d}",
-            "model":       make_models_list(pct),
-            "sugar_peaks": D14_SUGAR,
-            "spice_peaks": D14_SPICE,
+            "label":            f"d14_hetero_p{pct:03d}",
+            "model":            make_models_list(pct),
+            "sugar_peaks":      D14_SUGAR,
+            "spice_peaks":      D14_SPICE,
+            "experimentalGroup": "bentham",
         })
     return conditions
 

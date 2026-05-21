@@ -10,14 +10,15 @@ import sys
 import time
 
 
-def generate_seeds(n, master_seed=42):
-    random.seed(master_seed)
-    seeds = []
-    while len(seeds) < n:
-        s = random.randint(0, sys.maxsize)
-        if s not in seeds:
-            seeds.append(s)
-    return seeds
+def generate_seeds(n, max_val=1000, master_seed=42):
+    if n > max_val:
+        raise ValueError(f"Cannot generate {n} unique seeds from a pool of {max_val}")
+    pool = list(range(1, max_val + 1))
+    rng = random.Random(master_seed)
+    for i in range(len(pool) - 1, len(pool) - 1 - n, -1):
+        j = rng.randint(0, i)
+        pool[i], pool[j] = pool[j], pool[i]
+    return pool[len(pool) - n:]
 
 
 def load_base_config(path):
@@ -44,6 +45,7 @@ def make_run_config(base, condition, seed, timesteps, log_path):
     cfg["logfile"]                  = log_path
     cfg["agentLogfile"]             = None
     cfg["logfileFormat"]            = "json"
+    cfg["experimentalGroup"]        = condition.get("experimentalGroup", None)
     return cfg
 
 
@@ -98,7 +100,7 @@ def parse_sim_log(log_path, label, seed, duration=0.0):
         b   = int(entry.get("agentsBorn", 0))
         total_deaths += d
         total_born   += b
-        per_timestep.append({
+        row = {
             "condition":             label,
             "seed":                  seed,
             "timestep":              int(entry.get("timestep", 0)),
@@ -114,7 +116,22 @@ def parse_sim_log(log_path, label, seed, duration=0.0):
             "meanAge":               float(entry.get("meanAge", 0)),
             "tradeVolume":           float(entry.get("tradeVolume", 0)),
             "meanHappiness":         float(entry.get("meanHappiness", 0)),
-        })
+        }
+        # Per-group stats (present when experimentalGroup="bentham" is set)
+        for prefix in ("bentham", "control"):
+            for stat, key in [
+                ("Population",       f"{prefix}Population"),
+                ("MeanWealth",       f"{prefix}MeanWealth"),
+                ("SocietalWealth",   f"{prefix}AgentWealthTotal"),
+                ("MeanTimeToLive",   f"{prefix}AgentMeanTimeToLive"),
+                ("MeanAge",          f"{prefix}MeanAge"),
+                ("MeanHappiness",    f"{prefix}MeanHappiness"),
+                ("AgentDeaths",      f"{prefix}AgentDeaths"),
+                ("AgentsBorn",       f"{prefix}AgentsBorn"),
+            ]:
+                if key in entry:
+                    row[f"{prefix}{stat}"] = float(entry[key])
+        per_timestep.append(row)
         final_pop = pop
 
     last = per_timestep[-1] if per_timestep else {}
@@ -186,7 +203,7 @@ def make_models_list(pct_bentham, total_agents=250):
 def add_common_args(p):
     p.add_argument("-c", "--config",    default="config.json")
     p.add_argument("-o", "--output",    default="data")
-    p.add_argument("-s", "--seeds",     type=int, default=30)
+    p.add_argument("-s", "--seeds",     type=int, default=50)
     p.add_argument("-t", "--timesteps", type=int, default=5000)
     p.add_argument("-j", "--cores",     type=int, default=1)
     p.add_argument("--python",          default="python3")
