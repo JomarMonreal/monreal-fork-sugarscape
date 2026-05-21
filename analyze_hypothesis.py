@@ -50,6 +50,7 @@ METRICS = [
     ("finalSocietalWealth", "Societal Wealth"),
     ("finalGini",           "Gini Coefficient"),
     ("finalMeanTimeToLive", "Mean Time to Live"),
+    ("finalMeanWealth",     "Mean Agent Wealth"),
 ]
 
 
@@ -169,8 +170,8 @@ def analyze(config_name, config, project_root):
              int((df[(df["condition"] == l) & (df["extinct"] == False)]).shape[0])]
             for l in present
         ]
-        chi2, p_chi, dof, _ = chi2_contingency(table)
-        print(f"\n  Extinction Rate (chi-square, df={dof})")
+        total_extinct = sum(row[0] for row in table)
+        print(f"\n  Extinction Rate")
         print(f"  {'Group':<18} {'Extinct/Total':>14}  {'Rate':>8}")
         print(f"  {'-'*44}")
         for lbl, row in zip(present, table):
@@ -178,16 +179,29 @@ def analyze(config_name, config, project_root):
             total = row[0] + row[1]
             rate  = row[0] / total * 100 if total > 0 else float("nan")
             print(f"  {short:<18} {row[0]:>5}/{total:<8}  {rate:>7.1f}%")
-        print(f"\n  χ²={chi2:.3f},  p={p_chi:.4f} {sig_label(p_chi)}")
-        rows.append({
-            "config":  config_name,
-            "metric":  "extinctionRate",
-            "H":       round(chi2, 3),
-            "p":       round(p_chi, 4),
-            "sig":     sig_label(p_chi),
-            "eta2":    float("nan"),
-            "effect":  "n/a",
-        })
+        if total_extinct == 0:
+            print(f"\n  χ²=N/A (no extinctions in any group — test not applicable)")
+            rows.append({
+                "config":  config_name,
+                "metric":  "extinctionRate",
+                "H":       float("nan"),
+                "p":       float("nan"),
+                "sig":     "n/a",
+                "eta2":    float("nan"),
+                "effect":  "n/a",
+            })
+        else:
+            chi2, p_chi, dof, _ = chi2_contingency(table)
+            print(f"\n  χ²={chi2:.3f} (df={dof}),  p={p_chi:.4f} {sig_label(p_chi)}")
+            rows.append({
+                "config":  config_name,
+                "metric":  "extinctionRate",
+                "H":       round(chi2, 3),
+                "p":       round(p_chi, 4),
+                "sig":     sig_label(p_chi),
+                "eta2":    float("nan"),
+                "effect":  "n/a",
+            })
 
     return rows
 
