@@ -411,6 +411,39 @@ def plot_execution_time(seed_df):
     print(f"  Saved: {out}")
 
 
+# ── Runtime Summary CSV ────────────────────────────────────────────────────────
+
+def save_runtime_table(seed_df):
+    """Save mean/SD/median/IQR of executionTime per condition to data/runtime_summary.csv."""
+    if seed_df.empty or "executionTime" not in seed_df.columns:
+        print("[SKIP] No executionTime data for runtime table.")
+        return
+
+    rows = []
+    for cfg in CONFIGS:
+        for agent in AGENT_TYPES:
+            vals = seed_df[seed_df["condition"] == cond(cfg["prefix"], agent)]["executionTime"].dropna()
+            if vals.empty:
+                continue
+            rows.append({
+                "config":     cfg["label"].strip(),
+                "model":      agent.capitalize(),
+                "mean_s":     round(vals.mean(),                              3),
+                "sd_s":       round(vals.std(),                               3),
+                "median_s":   round(vals.median(),                            3),
+                "iqr_s":      round(vals.quantile(0.75) - vals.quantile(0.25), 3),
+            })
+
+    if not rows:
+        return
+    out = os.path.join(ROOT, "data", "runtime_summary.csv")
+    with open(out, "w", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=rows[0].keys())
+        writer.writeheader()
+        writer.writerows(rows)
+    print(f"  Saved: {out}")
+
+
 # ── Descriptive Summary CSV ────────────────────────────────────────────────────
 
 def save_descriptive_table(seed_df):
@@ -599,13 +632,15 @@ def main():
 
     print("\nSaving descriptive summary ...")
     save_descriptive_table(seed_df)
+    save_runtime_table(seed_df)
 
     print("\nRunning statistical tests ...")
     run_statistics(seed_df)
 
     print("Done.")
-    print(f"  figures/                     — 9 PNGs (300 dpi)")
-    print(f"  data/descriptive_summary.csv — mean, SD, median, IQR per condition")
+    print(f"  figures/                         — 9 PNGs (300 dpi)")
+    print(f"  data/descriptive_summary.csv     — mean, SD, median, IQR per condition")
+    print(f"  data/runtime_summary.csv         — execution time stats per condition (Table 7)")
     print(f"  data/hypothesis_test_results.csv — KW + Dunn + eta2_H + chi-square")
 
 
