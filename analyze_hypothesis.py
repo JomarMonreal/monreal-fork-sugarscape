@@ -93,7 +93,7 @@ def analyze(config_name, config, project_root):
     csv_path = os.path.join(project_root, config["csv"])
     if not os.path.exists(csv_path):
         print(f"\n[SKIP] {config_name}: data not found at {csv_path}")
-        return []
+        return [], []
 
     df   = pd.read_csv(csv_path)
     pfx  = config["prefix"]
@@ -102,7 +102,7 @@ def analyze(config_name, config, project_root):
     present = [l for l in lbls if l in df["condition"].values]
     if len(present) < 2:
         print(f"\n[SKIP] {config_name}: fewer than 2 agent-type groups in data")
-        return []
+        return [], []
 
     k = len(present)
     print(f"\n{'='*72}")
@@ -114,6 +114,7 @@ def analyze(config_name, config, project_root):
     print(f"{'='*72}")
 
     rows = []
+    dunn_rows = []
 
     for col, label in METRICS:
         if col not in df.columns:
@@ -153,6 +154,14 @@ def analyze(config_name, config, project_root):
                     pv = dunn.loc[idx[i], idx[j]]
                     print(f"    {idx[i].capitalize()} vs {idx[j].capitalize()}: "
                           f"p={pv:.4f} {sig_label(pv)}")
+                    dunn_rows.append({
+                        "config":  config_name,
+                        "metric":  col,
+                        "group1":  idx[i].capitalize(),
+                        "group2":  idx[j].capitalize(),
+                        "p":       round(pv, 4),
+                        "sig":     sig_label(pv),
+                    })
 
         rows.append({
             "config":  config_name,
@@ -203,26 +212,37 @@ def analyze(config_name, config, project_root):
                 "effect":  "n/a",
             })
 
-    return rows
+    return rows, dunn_rows
 
 
 def main():
-    root     = os.path.dirname(os.path.abspath(__file__))
-    all_rows = []
+    root      = os.path.dirname(os.path.abspath(__file__))
+    all_rows  = []
+    all_dunn  = []
 
     for name, cfg in CONFIGS.items():
-        r = analyze(name, cfg, root)
+        r, d = analyze(name, cfg, root)
         all_rows.extend(r)
+        all_dunn.extend(d)
+
+    os.makedirs(os.path.join(root, "data"), exist_ok=True)
 
     if all_rows:
         out = os.path.join(root, "data", "hypothesis_test_results.csv")
-        os.makedirs(os.path.dirname(out), exist_ok=True)
         with open(out, "w", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=all_rows[0].keys())
             writer.writeheader()
             writer.writerows(all_rows)
         print(f"\n{'='*72}")
-        print(f"  Full results saved to  {out}")
+        print(f"  KW results saved to    {out}")
+
+    if all_dunn:
+        out_dunn = os.path.join(root, "data", "dunn_results.csv")
+        with open(out_dunn, "w", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=all_dunn[0].keys())
+            writer.writeheader()
+            writer.writerows(all_dunn)
+        print(f"  Dunn results saved to  {out_dunn}")
 
     print("\nSig. codes: *** p<0.001  ** p<0.01  * p<0.05  ns = not significant")
     print("Effect size η² (Kruskal-Wallis): <0.01 negligible / 0.01 small / "
