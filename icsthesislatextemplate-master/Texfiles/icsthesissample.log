@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.5.20)  21 MAY 2026 00:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.5.20)  21 MAY 2026 11:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -415,8 +415,13 @@ LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
  [7
 
 ]
+Underfull \hbox (badness 5504) in paragraph at lines 74--78
+\OT1/ptm/b/n/12 JOMAR MON-REAL\OT1/ptm/m/n/12 , Uni-ver-sity of the Philip-pines Los Ba[]nos, MAY 2026.
+ []
+
+
 Underfull \hbox (badness 10000) in paragraph at lines 74--78
-\OT1/ptm/b/n/12 OF RE-SOURCE CON-CEN-TRA-TION ON ETH-I-CAL AGENT SO-CI-ETAL
+\OT1/ptm/b/n/12 CON-CEN-TRATED PRES-SURE: RE-SOURCE CON-CEN-TRA-TION AND
  []
 
 
@@ -433,21 +438,26 @@ Underfull \hbox (badness 1132) in paragraph at lines 88--89
 
 [1
 
-] [2] [3] [4] [5] [6
+] [2] [3]
+Underfull \hbox (badness 1895) in paragraph at lines 107--108
+\OT1/ptm/m/n/12 so-ci-eties af-fects so-ci-etal out-comes un-der both the dis-tributed ($\OML/ztmcm/m/it/12 d \OT1/ztmcm/m/n/12 = 14$\OT1/ptm/m/n/12 ) and
+ []
 
-] [7] [8]
-<figuretest.jpg, id=55, 1027.84pt x 730.73pt>
+[4] [5
+
+] [6] [7] [8
+
+] [9]
+<figuretest.jpg, id=61, 1027.84pt x 730.73pt>
 File: figuretest.jpg Graphic file (type jpg)
 <use figuretest.jpg>
-Package pdftex.def Info: figuretest.jpg  used on input line 128.
+Package pdftex.def Info: figuretest.jpg  used on input line 173.
 (pdftex.def)             Requested size: 200.75073pt x 142.72035pt.
- [9
+ [10 <./figuretest.jpg>] [11] [12] [13
 
- <./figuretest.jpg>] [10] [11] [12
+] [14] [15] [16
 
-] [13] [14] [15
-
-] (./icsthesissample.bbl) [16
+] (./icsthesissample.bbl) [17
 
 
 ] (./icsthesissample.aux)
@@ -457,18 +467,18 @@ L3 programming layer <2026-01-19>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 6207 strings out of 467533
- 104569 string characters out of 5422138
- 614936 words of memory out of 5000000
- 35029 multiletter control sequences out of 15000+600000
- 643256 words of font info for 68 fonts, out of 8000000 for 9000
+ 6215 strings out of 467533
+ 104657 string characters out of 5422138
+ 617020 words of memory out of 5000000
+ 35031 multiletter control sequences out of 15000+600000
+ 645036 words of font info for 74 fonts, out of 8000000 for 9000
  1155 hyphenation exceptions out of 8191
- 73i,8n,79p,1435b,541s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on icsthesissample.pdf (24 pages, 204719 bytes).
+ 73i,9n,79p,2094b,543s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on icsthesissample.pdf (25 pages, 225247 bytes).
 PDF statistics:
- 98 PDF objects out of 1000 (max. 8388607)
- 64 compressed objects within 1 object stream
+ 112 PDF objects out of 1000 (max. 8388607)
+ 73 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

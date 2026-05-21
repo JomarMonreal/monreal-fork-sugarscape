@@ -14,6 +14,75 @@ TkInter
 Usage:
 python sugarscape.py
 
+Monreal (2026) Study: Concentrated Pressure: Resource Concentration and Ethical Agent Outcomes
+This fork extends the Digital Terrarium (Kremer-Herman et al., 2024) to study how resource
+peak configurations affect societal outcomes of ethical decision models. Three resource
+configurations are compared: four-peak (baseline), two-peak (intermediate), and single-peak
+(treatment). A heterogeneous Egoist-Bentham sweep (Phase 2) is also included.
+
+Requirements for study scripts:
+Python 3.8+
+pandas
+
+Install dependencies:
+pip install pandas
+
+Visualizing Resource Configurations (GUI Demo):
+Run short 200-timestep demos to inspect where resource peaks appear on the grid before
+committing to full experiment runs. Requires a display (not headless).
+
+Four-peak baseline (two sugar peaks + two spice peaks, opposing quadrants):
+    python sugarscape.py --conf test_gui.json
+
+Two-peak intermediate (one sugar peak + one spice peak, diagonal opposing quadrants):
+    python sugarscape.py --conf test_gui_twopeak.json
+
+Single-peak co-located (sugar and spice at same central point):
+    python sugarscape.py --conf test_gui_onepeak.json
+
+Running the Full Experiment (Phase 1 - Nine Conditions):
+Each script runs 30 seeds x 5000 timesteps per condition. Use -j to set parallel workers.
+Results are saved under data/<config>_results/ as CSV files.
+
+Conditions 1-3: Four-peak x utilitarian / altruistic / egoistic
+    python run_four_peak.py -j <num_cores>
+
+Conditions 4-6: Two-peak x utilitarian / altruistic / egoistic
+    python run_two_peak.py -j <num_cores>
+
+Conditions 7-9: Single-peak x utilitarian / altruistic / egoistic
+    python run_one_peak.py -j <num_cores>
+
+Running the Full Experiment (Phase 2 - Heterogeneous Sweep):
+Varies the proportion of utilitarian agents in mixed Egoist-Bentham societies at 20%
+intervals (20%, 40%, 60%, 80%) under both four-peak and single-peak configurations.
+Adds 8 conditions (10-17). Results saved under data/hetero_results/.
+
+    python run_hetero.py -j <num_cores>
+
+Common Options for Study Scripts:
+    -j, --cores     Number of parallel worker processes (default: 1)
+    --seeds         Number of random seeds per condition (default: 30)
+    --timesteps     Number of timesteps per simulation run (default: 5000)
+
+Example: run single-peak conditions using 8 cores
+    python run_one_peak.py -j 8
+
+Example: run all conditions sequentially with default settings
+    python run_four_peak.py
+    python run_two_peak.py
+    python run_one_peak.py
+    python run_hetero.py
+
+Resuming Interrupted Runs:
+Completed seed runs are detected automatically. Re-running any script will skip seeds
+that already have a complete output file and resume from where it left off.
+
+Output Files (per condition, saved in data/<config>_results/<label>/):
+    per_timestep.csv        Mean metrics at each timestep across all seeds
+    per_seed_summary.csv    End-state summary for each individual seed
+    condition_aggregates.csv  Grand mean and std across all seeds for that condition
+
 Makefile Options:
 make clean
     Clean up working files and logs created by the software.
