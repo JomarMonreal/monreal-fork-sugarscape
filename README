@@ -16,9 +16,15 @@ python sugarscape.py
 
 Monreal (2026) Study: Concentrated Pressure: Resource Concentration and Ethical Agent Outcomes
 This fork extends the Digital Terrarium (Kremer-Herman et al., 2024) to study how resource
-peak configurations affect societal outcomes of ethical decision models. Three resource
-configurations are compared: four-peak (baseline), two-peak (intermediate), and single-peak
-(treatment). A heterogeneous Egoist-Bentham sweep (Phase 2) is also included.
+concentration affects societal outcomes of ethical decision models. Resource concentration is
+operationalized as the radial distance d of four symmetric peaks from the grid center (25,25).
+All configurations maintain four peaks (two sugar, two spice) in opposing diagonal quadrants.
+A heterogeneous Egoist-Bentham sweep (Phase 2) is also included.
+
+Resource Configurations:
+    d=14  peaks at grid corners — distributed, replicates Kremer-Herman et al. (2024) baseline
+    d=7   peaks drawn inward — intermediate concentration
+    d=0   all peaks at center (25,25) — maximum concentration, equivalent to single co-located peak
 
 Requirements for study scripts:
 Python 3.8+
@@ -31,48 +37,57 @@ Visualizing Resource Configurations (GUI Demo):
 Run short 200-timestep demos to inspect where resource peaks appear on the grid before
 committing to full experiment runs. Requires a display (not headless).
 
-Four-peak baseline (two sugar peaks + two spice peaks, opposing quadrants):
+d=14 distributed — peaks at corners, replicates Kremer-Herman et al. (2024):
     python sugarscape.py --conf test_gui.json
 
-Two-peak intermediate (one sugar peak + one spice peak, diagonal opposing quadrants):
-    python sugarscape.py --conf test_gui_twopeak.json
+d=7 intermediate — peaks drawn inward toward center:
+    python sugarscape.py --conf test_gui_d7.json
 
-Single-peak co-located (sugar and spice at same central point):
+d=0 concentrated — all peaks converge at center (25,25):
     python sugarscape.py --conf test_gui_onepeak.json
 
 Running the Full Experiment (Phase 1 - Nine Conditions):
 Each script runs 30 seeds x 5000 timesteps per condition. Use -j to set parallel workers.
 Results are saved under data/<config>_results/ as CSV files.
 
-Conditions 1-3: Four-peak x utilitarian / altruistic / egoistic
+Conditions 1-3: d=14 (distributed) x utilitarian / altruistic / egoistic
     python run_four_peak.py -j <num_cores>
 
-Conditions 4-6: Two-peak x utilitarian / altruistic / egoistic
-    python run_two_peak.py -j <num_cores>
+Conditions 4-6: d=7 (intermediate) x utilitarian / altruistic / egoistic
+    python run_d_sweep.py --distances 7 -j <num_cores>
 
-Conditions 7-9: Single-peak x utilitarian / altruistic / egoistic
+Conditions 7-9: d=0 (concentrated) x utilitarian / altruistic / egoistic
     python run_one_peak.py -j <num_cores>
 
 Running the Full Experiment (Phase 2 - Heterogeneous Sweep):
 Varies the proportion of utilitarian agents in mixed Egoist-Bentham societies at 20%
-intervals (20%, 40%, 60%, 80%) under both four-peak and single-peak configurations.
-Adds 8 conditions (10-17). Results saved under data/hetero_results/.
+intervals (20%, 40%, 60%, 80%) under all three distance configurations.
+Adds 12 conditions (10-21). Run each configuration separately:
 
-    python run_hetero.py -j <num_cores>
+Conditions 10-13: d=14 (distributed) heterogeneous sweep
+    python run_hetero_d14.py -j <num_cores>
+
+Conditions 14-17: d=7 (intermediate) heterogeneous sweep
+    python run_hetero_d7.py -j <num_cores>
+
+Conditions 18-21: d=0 (concentrated) heterogeneous sweep
+    python run_hetero_d0.py -j <num_cores>
 
 Common Options for Study Scripts:
     -j, --cores     Number of parallel worker processes (default: 1)
     --seeds         Number of random seeds per condition (default: 30)
     --timesteps     Number of timesteps per simulation run (default: 5000)
 
-Example: run single-peak conditions using 8 cores
-    python run_one_peak.py -j 8
+Example: run d=7 intermediate conditions using 8 cores
+    python run_d_sweep.py --distances 7 -j 8
 
 Example: run all conditions sequentially with default settings
     python run_four_peak.py
-    python run_two_peak.py
+    python run_d_sweep.py --distances 7
     python run_one_peak.py
-    python run_hetero.py
+    python run_hetero_d14.py
+    python run_hetero_d7.py
+    python run_hetero_d0.py
 
 Resuming Interrupted Runs:
 Completed seed runs are detected automatically. Re-running any script will skip seeds
