@@ -1,17 +1,19 @@
-d,config,metric,H,p,sig,eta2_H,effect
-14,d=14  (distributed),finalPopulation,31.424,0.0,***,0.338,large
-14,d=14  (distributed),finalSocietalWealth,1.263,0.5318,ns,0.0,negligible
-14,d=14  (distributed),finalGini,1.604,0.4484,ns,0.0,negligible
-14,d=14  (distributed),finalMeanTimeToLive,0.136,0.9342,ns,0.0,negligible
-14,d=14  (distributed),finalMeanWealth,6.878,0.0321,*,0.056,small
-14,d=14  (distributed),extinctionRate,10.08,0.0065,**,nan,n/a
-7,d=7   (intermediate),finalPopulation,59.304,0.0,***,0.659,large
-7,d=7   (intermediate),finalSocietalWealth,11.079,0.0039,**,0.104,medium
-7,d=7   (intermediate),finalGini,59.421,0.0,***,0.66,large
-7,d=7   (intermediate),finalMeanTimeToLive,2.634,0.2679,ns,0.007,negligible
-7,d=7   (intermediate),finalMeanWealth,53.75,0.0,***,0.595,large
-0,d=0   (concentrated),finalPopulation,34.958,0.0,***,0.379,large
-0,d=0   (concentrated),finalSocietalWealth,31.127,0.0,***,0.335,large
-0,d=0   (concentrated),finalGini,30.783,0.0,***,0.331,large
-0,d=0   (concentrated),finalMeanTimeToLive,1.042,0.5938,ns,0.0,negligible
-0,d=0   (concentrated),finalMeanWealth,5.283,0.0713,ns,0.038,small
+config,metric,H,p,sig,eta2,effect
+four_peak (d=14),finalPopulation,31.424,0.0,***,0.338,large
+four_peak (d=14),finalSocietalWealth,1.263,0.5318,ns,0.0,negligible
+four_peak (d=14),finalGini,1.604,0.4484,ns,0.0,negligible
+four_peak (d=14),finalMeanTimeToLive,0.136,0.9342,ns,0.0,negligible
+four_peak (d=14),finalMeanWealth,6.878,0.0321,*,0.056,small
+four_peak (d=14),extinctionRate,10.08,0.0065,**,nan,n/a
+d=7 (intermediate),finalPopulation,59.304,0.0,***,0.659,large
+d=7 (intermediate),finalSocietalWealth,11.079,0.0039,**,0.104,medium
+d=7 (intermediate),finalGini,59.421,0.0,***,0.66,large
+d=7 (intermediate),finalMeanTimeToLive,2.634,0.2679,ns,0.007,negligible
+d=7 (intermediate),finalMeanWealth,53.75,0.0,***,0.595,large
+d=7 (intermediate),extinctionRate,nan,nan,n/a,nan,n/a
+one_peak (d=0),finalPopulation,34.958,0.0,***,0.379,large
+one_peak (d=0),finalSocietalWealth,31.127,0.0,***,0.335,large
+one_peak (d=0),finalGini,30.783,0.0,***,0.331,large
+one_peak (d=0),finalMeanTimeToLive,1.042,0.5938,ns,0.0,negligible
+one_peak (d=0),finalMeanWealth,5.283,0.0713,ns,0.038,small
+one_peak (d=0),extinctionRate,nan,nan,n/a,nan,n/a
