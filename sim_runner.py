@@ -34,8 +34,6 @@ def make_run_config(base, condition, seed, timesteps, log_path):
     cfg["environmentSugarPeaks"]    = condition["sugar_peaks"]
     cfg["environmentSpicePeaks"]    = condition["spice_peaks"]
     cfg["timesteps"]                = timesteps
-    cfg["startingDiseases"]         = 0
-    cfg["startingDiseasesPerAgent"] = [0, 0]
     cfg["headlessMode"]             = True
     cfg["debugMode"]                = ["none"]
     cfg["keepAlivePostExtinction"]  = False
