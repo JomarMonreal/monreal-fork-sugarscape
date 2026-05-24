@@ -1,10 +1,10 @@
 config,model,mean_s,sd_s,median_s,iqr_s
-d=14  (distributed),Utilitarian,3216.158,1569.88,4005.88,3503.59
-d=14  (distributed),Altruistic,1869.173,1270.256,2191.76,2093.158
-d=14  (distributed),Egoistic,1738.266,1183.856,1560.01,2106.902
-d=7   (intermediate),Utilitarian,751.963,40.153,750.39,47.978
-d=7   (intermediate),Altruistic,1962.416,138.868,1960.925,262.515
-d=7   (intermediate),Egoistic,1898.303,155.543,1932.935,189.832
-d=0   (concentrated),Utilitarian,381.106,34.932,373.845,10.708
-d=0   (concentrated),Altruistic,979.072,116.015,987.455,180.928
-d=0   (concentrated),Egoistic,962.053,121.467,961.705,191.283
+d=14  (distributed),Utilitarian,0.0,0.0,0.0,0.0
+d=14  (distributed),Altruistic,0.0,0.0,0.0,0.0
+d=14  (distributed),Egoistic,0.0,0.0,0.0,0.0
+d=7   (intermediate),Utilitarian,579.58,289.722,659.1,111.61
+d=7   (intermediate),Altruistic,1746.932,616.682,1928.535,300.488
+d=7   (intermediate),Egoistic,1684.813,607.778,1876.38,306.542
+d=0   (concentrated),Utilitarian,280.58,133.678,324.995,47.367
+d=0   (concentrated),Altruistic,634.33,397.271,808.12,748.74
+d=0   (concentrated),Egoistic,667.61,414.751,806.945,736.918
