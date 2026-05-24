@@ -31,8 +31,10 @@ def make_run_config(base, condition, seed, timesteps, log_path):
     cfg = dict(base)
     cfg["seed"]                     = seed
     cfg["agentDecisionModels"]      = condition["model"]
-    cfg["environmentSugarPeaks"]    = condition["sugar_peaks"]
-    cfg["environmentSpicePeaks"]    = condition["spice_peaks"]
+    cfg["environmentSugarPeaks"]    = condition.get("sugar_peaks", [])
+    cfg["environmentSpicePeaks"]    = condition.get("spice_peaks", [])
+    if "environment_file" in condition:
+        cfg["environmentFile"] = condition["environment_file"]
     cfg["timesteps"]                = timesteps
     cfg["headlessMode"]             = True
     cfg["debugMode"]                = ["none"]
