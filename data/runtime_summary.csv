@@ -1,5 +1,6 @@
 config,model,mean_s,sd_s,median_s,iqr_s
-d=14  (distributed),Utilitarian,3331.981,1434.051,3890.675,2366.378
+d=14  (distributed),Altruistic,1166.27,1306.067,671.535,2330.47
+d=14  (distributed),Egoistic,1020.438,1187.359,765.615,1810.628
 d=7   (intermediate),Utilitarian,579.58,289.722,659.1,111.61
 d=7   (intermediate),Altruistic,1746.932,616.682,1928.535,300.488
 d=7   (intermediate),Egoistic,1684.813,607.778,1876.38,306.542
