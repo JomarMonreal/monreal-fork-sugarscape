@@ -84,7 +84,7 @@ def run_one_simulation(args):
     return config_path, dur
 
 
-def parse_sim_log(log_path, label, seed, duration=0.0):
+def parse_sim_log(log_path, label, seed, duration=None):
     sim_log = safe_json_load(log_path)
     if not sim_log:
         return None, None
@@ -138,7 +138,7 @@ def parse_sim_log(log_path, label, seed, duration=0.0):
     summary = {
         "condition":           label,
         "seed":                seed,
-        "executionTime":       round(duration, 2),
+        "executionTime":       round(duration, 2) if duration is not None else None,
         "extinct":             (final_pop == 0),
         "finalPopulation":     final_pop,
         "totalDeaths":         total_deaths,
@@ -258,7 +258,7 @@ def run_experiment(conditions, args, results_subdir="results"):
     cond_summaries = {c["label"]: [] for c in conditions}
 
     for (label, seed, cfg_path, log_path) in all_runs:
-        dur = session_durations.get(cfg_path, 0.0)
+        dur = session_durations.get(cfg_path, None)  # None = skipped, not timed
         pts, summary = parse_sim_log(log_path, label, seed, dur)
         if pts is None:
             print(f"  [warn] No data for {label} seed={seed}")
