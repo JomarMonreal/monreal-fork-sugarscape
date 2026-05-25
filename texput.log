@@ -1,18 +1,18 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.5.20)  20 MAY 2026 23:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.5.20)  22 MAY 2026 05:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**
+**icsthesissample.tex
 
 ! Emergency stop.
-<*> 
-    
-End of file on the terminal!
+<*> icsthesissample.tex
+                       
+*** (job aborted, file error in nonstop mode)
 
  
 Here is how much of TeX's memory you used:
- 4 strings out of 467533
- 148 string characters out of 5422138
+ 3 strings out of 467533
+ 118 string characters out of 5422138
  433756 words of memory out of 5000000
  29014 multiletter control sequences out of 15000+600000
  627721 words of font info for 40 fonts, out of 8000000 for 9000
