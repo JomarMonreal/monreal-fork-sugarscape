@@ -4,14 +4,20 @@ generate_figures.py  —  thesis visualization and statistical summary
 
 Outputs (all saved under figures/ and data/)
 --------------------------------------------
-figures/01_population_timeseries.png
-figures/02_societalWealth_timeseries.png
-figures/03_giniCoefficient_timeseries.png
-figures/04_meanTimeToLive_timeseries.png
-figures/05_meanWealth_timeseries.png
-figures/06_final_values_boxplot.png
+figures/01_population_timeseries_d14.png
+figures/01_population_timeseries_d7.png
+figures/01_population_timeseries_d0.png
+figures/02_societalWealth_timeseries_d14.png  (and d7, d0)
+figures/03_giniCoefficient_timeseries_d14.png (and d7, d0)
+figures/04_meanTimeToLive_timeseries_d14.png  (and d7, d0)
+figures/05_meanWealth_timeseries_d14.png      (and d7, d0)
+figures/06_boxplot_finalPopulation.png
+figures/06_boxplot_finalSocietalWealth.png
+figures/06_boxplot_finalGini.png
+figures/06_boxplot_finalMeanTimeToLive.png
+figures/06_boxplot_finalMeanWealth.png
 figures/07_extinction_rate.png
-figures/08_effect_size_gradient.png
+figures/08_effectSize_finalPopulation.png     (and other metrics)
 figures/09_execution_time.png
 data/descriptive_summary.csv
 data/hypothesis_test_results.csv   (also printed to console)
@@ -152,16 +158,19 @@ def plot_timeseries(ts_df):
         for a in AGENT_TYPES
     ]
 
+    d_suffix = {14: "d14", 7: "d7", 0: "d0"}
+
     for fig_num, (col, ylabel) in enumerate(TS_METRICS, start=1):
         if col not in ts_df.columns:
             continue
 
-        fig, axes = plt.subplots(1, 3, figsize=(13, 3.8), sharey=False)
-        fig.suptitle(f"{ylabel} Over Time  (mean ± 1 SD across seeds)",
-                     fontsize=10, fontweight="bold")
-
-        for ax, cfg in zip(axes, CONFIGS):
+        for cfg in CONFIGS:
             sub = ts_df[ts_df["d"] == cfg["d"]]
+            fig, ax = plt.subplots(figsize=(6, 4))
+            ax.set_title(f"{ylabel} Over Time — {cfg['label'].strip()}\n"
+                         "(mean ± 1 SD across seeds)",
+                         fontsize=9, fontweight="bold")
+
             for agent in AGENT_TYPES:
                 grp = sub[sub["condition"] == cond(cfg["prefix"], agent)]
                 if grp.empty:
@@ -181,17 +190,16 @@ def plot_timeseries(ts_df):
                     agg["mean"] + agg["std"],
                     color=COLORS[agent], alpha=0.15,
                 )
-            ax.set_title(cfg["label"])
-            ax.set_xlabel("Timestep")
-            if ax is axes[0]:
-                ax.set_ylabel(ylabel)
 
-        axes[-1].legend(handles=legend_handles, loc="upper right")
-        fig.tight_layout()
-        out = os.path.join(FIG_DIR, f"0{fig_num}_{col}_timeseries.png")
-        fig.savefig(out, bbox_inches="tight")
-        plt.close(fig)
-        print(f"  Saved: {out}")
+            ax.set_xlabel("Timestep")
+            ax.set_ylabel(ylabel)
+            ax.legend(handles=legend_handles, loc="upper right")
+            fig.tight_layout()
+            suffix = d_suffix[cfg["d"]]
+            out = os.path.join(FIG_DIR, f"0{fig_num}_{col}_timeseries_{suffix}.png")
+            fig.savefig(out, bbox_inches="tight")
+            plt.close(fig)
+            print(f"  Saved: {out}")
 
 
 # ── Figure 5: Final Value Box Plots ───────────────────────────────────────────
@@ -206,14 +214,15 @@ def plot_final_boxplots(seed_df):
     width    = 0.22
     x_labels = ["d=14\n(distributed)", "d=7\n(intermediate)", "d=0\n(concentrated)"]
 
-    fig, axes = plt.subplots(2, 3, figsize=(15, 7))
-    axes = axes.flatten()
-    fig.suptitle("Final Outcome Distributions by Condition",
-                 fontsize=11, fontweight="bold")
+    legend_handles = [
+        mpatches.Patch(facecolor=COLORS[a], alpha=0.7, label=a.capitalize())
+        for a in AGENT_TYPES
+    ]
 
-    for ax, (col, title) in zip(axes, FINAL_METRICS):
+    for col, title in FINAL_METRICS:
         if col not in seed_df.columns:
             continue
+
         bp_data, bp_pos, bp_colors = [], [], []
 
         for i, d in enumerate(d_vals):
@@ -229,6 +238,9 @@ def plot_final_boxplots(seed_df):
         if not bp_data:
             continue
 
+        fig, ax = plt.subplots(figsize=(7, 4))
+        ax.set_title(f"{title} by Condition", fontsize=10, fontweight="bold")
+
         bp = ax.boxplot(
             bp_data, positions=bp_pos, widths=width * 0.85,
             patch_artist=True,
@@ -243,19 +255,13 @@ def plot_final_boxplots(seed_df):
 
         ax.set_xticks(x_pos)
         ax.set_xticklabels(x_labels)
-        ax.set_title(title)
         ax.set_xlabel("Resource Configuration")
-
-    legend_handles = [
-        mpatches.Patch(facecolor=COLORS[a], alpha=0.7, label=a.capitalize())
-        for a in AGENT_TYPES
-    ]
-    axes[-1].legend(handles=legend_handles, loc="best")
-    fig.tight_layout()
-    out = os.path.join(FIG_DIR, "06_final_values_boxplot.png")
-    fig.savefig(out, bbox_inches="tight")
-    plt.close(fig)
-    print(f"  Saved: {out}")
+        ax.legend(handles=legend_handles, loc="best")
+        fig.tight_layout()
+        out = os.path.join(FIG_DIR, f"06_boxplot_{col}.png")
+        fig.savefig(out, bbox_inches="tight")
+        plt.close(fig)
+        print(f"  Saved: {out}")
 
 
 # ── Figure 6: Extinction Rate ──────────────────────────────────────────────────
@@ -304,9 +310,6 @@ def plot_effect_size_gradient(seed_df):
         return
 
     d_vals = [0, 7, 14]
-    fig, axes = plt.subplots(1, 5, figsize=(16, 4))
-    fig.suptitle(r"Effect Size ($\eta^2_H$) vs. Peak Distance $d$  (RQ4)",
-                 fontsize=10, fontweight="bold")
 
     threshold_lines = [
         (0.01, "#aaaaaa", "small (0.01)"),
@@ -314,7 +317,7 @@ def plot_effect_size_gradient(seed_df):
         (0.14, "#444444", "large (0.14)"),
     ]
 
-    for ax, (col, label) in zip(axes, FINAL_METRICS):
+    for col, label in FINAL_METRICS:
         eta2_vals, p_vals = [], []
         for d in d_vals:
             cfg    = next(c for c in CONFIGS if c["d"] == d)
@@ -336,10 +339,15 @@ def plot_effect_size_gradient(seed_df):
                 eta2_vals.append(float("nan"))
                 p_vals.append(float("nan"))
 
+        fig, ax = plt.subplots(figsize=(5, 4))
+        ax.set_title(
+            r"Effect Size ($\eta^2_H$) vs. Peak Distance $d$ — " + label,
+            fontsize=9, fontweight="bold",
+        )
+
         ax.plot(d_vals, eta2_vals, "o-", color="#1a1a1a", linewidth=1.8,
                 markersize=6, zorder=5)
 
-        # Annotate significance on each point
         for d, eta2, p in zip(d_vals, eta2_vals, p_vals):
             if not math.isnan(p):
                 ax.annotate(sig_label(p), xy=(d, eta2),
@@ -352,17 +360,14 @@ def plot_effect_size_gradient(seed_df):
         ax.set_xticks(d_vals)
         ax.set_xticklabels(["d=0", "d=7", "d=14"])
         ax.set_xlabel("Peak Distance (d)")
-        ax.set_title(label, fontsize=8)
+        ax.set_ylabel(r"$\eta^2_H$")
         ax.set_ylim(bottom=0)
-        if ax is axes[0]:
-            ax.set_ylabel(r"$\eta^2_H$")
-            ax.legend(fontsize=6, loc="upper left")
-
-    fig.tight_layout()
-    out = os.path.join(FIG_DIR, "08_effect_size_gradient.png")
-    fig.savefig(out, bbox_inches="tight")
-    plt.close(fig)
-    print(f"  Saved: {out}")
+        ax.legend(fontsize=7, loc="upper left")
+        fig.tight_layout()
+        out = os.path.join(FIG_DIR, f"08_effectSize_{col}.png")
+        fig.savefig(out, bbox_inches="tight")
+        plt.close(fig)
+        print(f"  Saved: {out}")
 
 
 # ── Figure 8: Execution Time ───────────────────────────────────────────────────
@@ -638,7 +643,7 @@ def main():
     run_statistics(seed_df)
 
     print("Done.")
-    print(f"  figures/                         — 9 PNGs (300 dpi)")
+    print(f"  figures/                         — up to 27 PNGs (300 dpi)")
     print(f"  data/descriptive_summary.csv     — mean, SD, median, IQR per condition")
     print(f"  data/runtime_summary.csv         — execution time stats per condition (Table 7)")
     print(f"  data/hypothesis_test_results.csv — KW + Dunn + eta2_H + chi-square")
