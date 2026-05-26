@@ -1,4 +1,13 @@
 \textbf {\underline {TABLE}}~\hfill \textbf {\underline {PAGE}}\par 
-\contentsline {table}{\numberline {1}{\ignorespaces Phase 1 Experimental Conditions}}{9}{}%
-\contentsline {table}{\numberline {2}{\ignorespaces Phase 2 Heterogeneous Conditions (Egoist-Bentham Sweep)}}{10}{}%
-\contentsline {table}{\numberline {3}{\ignorespaces Test Caption Table}}{13}{}%
+\contentsline {table}{\numberline {1}{\ignorespaces Bentham's Seven Dimensions of Utility in the Felicific Calculus}}{13}{}%
+\contentsline {table}{\numberline {2}{\ignorespaces Experimental Conditions}}{35}{}%
+\contentsline {table}{\numberline {3}{\ignorespaces Agent Initialization Parameters (Digital Terrarium Defaults)}}{37}{}%
+\contentsline {table}{\numberline {4}{\ignorespaces Research Design Summary: Objectives, Measures, and Procedures}}{47}{}%
+\contentsline {table}{\numberline {5}{\ignorespaces Key Outcomes for the Distributed Configuration ($d = 14$, $n = 100$ per model)}}{48}{}%
+\contentsline {table}{\numberline {6}{\ignorespaces Extinction Rate by Agent Type and Resource Configuration ($n = 100$ per condition)}}{49}{}%
+\contentsline {table}{\numberline {7}{\ignorespaces Key Societal Outcomes Across All Three Resource Configurations ($n = 100$ per model)}}{54}{}%
+\contentsline {table}{\numberline {8}{\ignorespaces $\eta ^2_H$ Effect Size by Outcome Metric and Resource Configuration}}{66}{}%
+\contentsline {table}{\numberline {9}{\ignorespaces Wall-Clock Execution Time per Simulation Run by Condition ($n = 100$ per condition)}}{71}{}%
+\contentsline {table}{\numberline {10}{\ignorespaces Full Descriptive Statistics for All Nine Experimental Conditions ($n = 100$ per condition)}}{79}{}%
+\contentsline {table}{\numberline {11}{\ignorespaces Kruskal-Wallis Test Results and Effect Sizes Across All Resource Configurations}}{83}{}%
+\contentsline {table}{\numberline {12}{\ignorespaces Dunn Post-hoc Pairwise Comparisons (Bonferroni-corrected $p$-values, $\alpha = 0.05$)}}{85}{}%

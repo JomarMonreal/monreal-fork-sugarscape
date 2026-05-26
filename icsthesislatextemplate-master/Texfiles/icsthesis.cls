@@ -252,10 +252,12 @@
 \newenvironment{abstractwithpageno}
 {
 	\patchcmd{\abstract}{\null\vfil}{}{}{}
+	\let\saved@endtitlepage\endtitlepage
+	\def\endtitlepage{}
 	\addcontentsline{toc}{chapter}{ABSTRACT}
 	\renewcommand{\abstractname}{ABSTRACT}
 	\begin{abstract}
-		
+
 	\thispagestyle{plain}\addtocounter{pagecounter}{1}
 	\setcounter{page}{\value{pagecounter}}
 	\setlength{\parindent}{5ex}
@@ -263,6 +265,7 @@
 }
 {
 	\end{abstract}
+	\let\endtitlepage\saved@endtitlepage
 	\renewcommand{\abstractname}{Abstract}
 }
 

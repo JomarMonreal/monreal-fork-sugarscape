@@ -1,2 +1,27 @@
 \textbf {\underline {FIGURE}}~\hfill \textbf {\underline {PAGE}}\par 
-\contentsline {figure}{\numberline {1}{\ignorespaces Test Caption Figure}}{10}{}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Initial resource landscape for each experimental configuration}}{4}{}%
+\contentsline {figure}{\numberline {2}{\ignorespaces The Sugarscape Digital Terrarium simulation environment}}{19}{}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Computing the effective cell range for candidate enumeration.}}{20}{}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Computing the immediate social density weight \(e\).}}{21}{}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Computing the immediate intensity \(i_k\).}}{22}{}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Computing the immediate duration \(d_k\).}}{22}{}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Computing the future social density weight \(e_f\).}}{23}{}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Computing the future intensity \(i_f\).}}{23}{}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Computing the future duration \(d_{f,k}\).}}{24}{}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Computing the per-person welfare score \(h_k\).}}{25}{}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Aggregating welfare scores using the selfishness factor \(\phi \).}}{25}{}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Selecting the optimal candidate cell by ethical score \(c^*\).}}{26}{}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Summary of Statistical Tests and Measures}}{42}{}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Mean population over time ($\pm $1 SD across 100 seeds), distributed ($d = 14$).}}{52}{}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Mean population over time ($\pm $1 SD across 100 seeds), moderately concentrated ($d = 7$).}}{53}{}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Mean population over time ($\pm $1 SD across 100 seeds), concentrated ($d = 0$).}}{53}{}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Final population distribution by agent type and resource configuration ($n = 100$ per condition).}}{56}{}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Final societal wealth distribution by agent type and resource configuration ($n = 100$ per condition).}}{57}{}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Final Gini coefficient distribution by agent type and resource configuration ($n = 100$ per condition).}}{57}{}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Final mean time to live distribution by agent type and resource configuration ($n = 100$ per condition).}}{58}{}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Final mean agent wealth distribution by agent type and resource configuration ($n = 100$ per condition).}}{58}{}%
+\contentsline {figure}{\numberline {22}{\ignorespaces $\eta ^2_H$ effect size as a function of peak distance $d$: final population (Objective~2).}}{62}{}%
+\contentsline {figure}{\numberline {23}{\ignorespaces $\eta ^2_H$ effect size as a function of peak distance $d$: final societal wealth (Objective~2).}}{63}{}%
+\contentsline {figure}{\numberline {24}{\ignorespaces $\eta ^2_H$ effect size as a function of peak distance $d$: Gini coefficient (Objective~2).}}{64}{}%
+\contentsline {figure}{\numberline {25}{\ignorespaces $\eta ^2_H$ effect size as a function of peak distance $d$: mean time to live (Objective~2).}}{64}{}%
+\contentsline {figure}{\numberline {26}{\ignorespaces $\eta ^2_H$ effect size as a function of peak distance $d$: mean agent wealth (Objective~2).}}{65}{}%
